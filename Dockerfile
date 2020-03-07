@@ -1,2 +1,4 @@
 FROM openjdk:11-jre-slim
-CMD exec java -Xms128m -Xmx512m -jar build/libs/*.jar
+COPY ./build/libs/*.jar /usr/app/
+WORKDIR /usr/app
+CMD exec java -Xms128m -Xmx512m -jar *.jar
