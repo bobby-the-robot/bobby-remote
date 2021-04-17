@@ -1,3 +1,9 @@
+const FORWARD = "FORWARD";
+const RIGHT = "RIGHT";
+const LEFT = "LEFT";
+const BACK = "BACK";
+const STOP = "STOP";
+
 const stompClient = function() {
     const socket = new SockJS('/ui');
     const stompClient = Stomp.over(socket);
@@ -5,7 +11,7 @@ const stompClient = function() {
     return stompClient;
 }();
 
-const sendDirection = function(direction) {
+const sendDirection = direction => {
     const uri = "/server/direction";
     const headers = {};
     const body = JSON.stringify({'direction': direction});
@@ -13,20 +19,65 @@ const sendDirection = function(direction) {
 }
 
 const init = function() {
+    const body = document.body;
     const forward = document.querySelector("div#forward");
     const left = document.querySelector("div#left");
     const right = document.querySelector("div#right");
     const back = document.querySelector("div#back");
-    forward.onclick = function() {
-        sendDirection('FORWARD');
+
+    //onmousedown
+    forward.onmousedown = () => {
+        sendDirection(FORWARD);
     };
-    left.onclick = function() {
-        sendDirection('LEFT');
+    left.onmousedown = () => {
+        sendDirection(LEFT);
     };
-    right.onclick = function() {
-        sendDirection('RIGHT');
+    right.onmousedown = () => {
+        sendDirection(RIGHT);
     };
-    back.onclick = function() {
-        sendDirection('BACK');
+    back.onmousedown = () => {
+        sendDirection(BACK);
+    };
+
+    //onmouseup
+    forward.onmouseup = () => {
+        sendDirection(STOP);
+    };
+    left.onmouseup = () => {
+        sendDirection(STOP);
+    };
+    right.onmouseup = () => {
+        sendDirection(STOP);
+    };
+    back.onmouseup = () => {
+        sendDirection(STOP);
+    };
+
+    //onkeydown
+    body.onkeydown = event => {
+        let direction;
+
+        switch(event.keyCode) {
+            case 87: //W
+                direction = FORWARD;
+                break;
+            case 68: //D
+                direction = RIGHT;
+                break;
+            case 65: //A
+                direction = LEFT;
+                break;
+            case 83: //S
+                direction = BACK;
+                break;
+            default:
+                direction = STOP;
+        }
+
+        sendDirection(direction);
+    };
+
+    body.onkeyup = () => {
+        sendDirection(STOP);
     };
 }();
