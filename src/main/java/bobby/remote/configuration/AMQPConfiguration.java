@@ -27,7 +27,7 @@ public class AMQPConfiguration {
         Channel channel = connection.createChannel();
         Map<String, Object> args = new HashMap<>();
         args.put("x-message-ttl", 3000);
-        channel.queueDeclare(MOTION_CONTROL_QUEUE_NAME, false, false, false, args);
+        channel.queueDeclare(MOTION_CONTROL_QUEUE_NAME, false, false, false, null);
 
         return channel;
     }
