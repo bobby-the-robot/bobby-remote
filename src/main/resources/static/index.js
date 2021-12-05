@@ -4,18 +4,15 @@ const LEFT = "LEFT";
 const BACK = "BACK";
 const STOP = "STOP";
 
-const stompClient = function() {
-    const socket = new SockJS('/ui');
-    const stompClient = Stomp.over(socket);
-    stompClient.connect({});
-    return stompClient;
-}();
-
 const sendDirection = direction => {
-    const uri = "/server/direction";
-    const headers = {};
-    const body = JSON.stringify({'direction': direction});
-    stompClient.send(uri, headers, body);
+    fetch("/direction",
+    {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({'direction': direction})
+    });
 }
 
 const init = function() {
