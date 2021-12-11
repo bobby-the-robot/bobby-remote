@@ -1,11 +1,15 @@
 package bobby.remote.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MotionDto {
 
-    private final Direction direction;
+    private Direction direction;
 
     public enum Direction {
         FORWARD, LEFT, RIGHT, BACK, STOP

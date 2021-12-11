@@ -14,7 +14,7 @@ class MotionControllerSpec extends Specification {
     @Subject
     private MotionController motionController = new MotionController(messageSender)
 
-    def shouldInvokeMessageSender() {
+    def "should invoke message sender"() {
         given:
         MotionDto motionDto = new MotionDto(direction)
 
