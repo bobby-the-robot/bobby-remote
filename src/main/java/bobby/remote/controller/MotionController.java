@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class DirectionController {
+public class MotionController {
 
     private final MessageSender messageSender;
 
-    @PostMapping("/direction")
-    public void direction(@RequestBody MotionDto message) {
+    @PostMapping("/move")
+    public void move(@RequestBody MotionDto message) {
         log.info(message.toString());
         messageSender.send(message);
     }

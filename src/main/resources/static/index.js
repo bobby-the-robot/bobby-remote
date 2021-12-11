@@ -4,8 +4,8 @@ const LEFT = "LEFT";
 const BACK = "BACK";
 const STOP = "STOP";
 
-const sendDirection = direction => {
-    fetch("/direction",
+const move = direction => {
+    fetch("/move",
     {
         headers: {
           'Content-Type': 'application/json'
@@ -24,30 +24,30 @@ const init = function() {
 
     //onmousedown
     forward.onmousedown = () => {
-        sendDirection(FORWARD);
+        move(FORWARD);
     };
     left.onmousedown = () => {
-        sendDirection(LEFT);
+        move(LEFT);
     };
     right.onmousedown = () => {
-        sendDirection(RIGHT);
+        move(RIGHT);
     };
     back.onmousedown = () => {
-        sendDirection(BACK);
+        move(BACK);
     };
 
     //onmouseup
     forward.onmouseup = () => {
-        sendDirection(STOP);
+        move(STOP);
     };
     left.onmouseup = () => {
-        sendDirection(STOP);
+        move(STOP);
     };
     right.onmouseup = () => {
-        sendDirection(STOP);
+        move(STOP);
     };
     back.onmouseup = () => {
-        sendDirection(STOP);
+        move(STOP);
     };
 
     //onkeydown
@@ -71,10 +71,10 @@ const init = function() {
                 direction = STOP;
         }
 
-        sendDirection(direction);
+        move(direction);
     };
 
     body.onkeyup = () => {
-        sendDirection(STOP);
+        move(STOP);
     };
 }();
