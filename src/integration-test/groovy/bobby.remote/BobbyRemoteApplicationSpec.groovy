@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles
 import spock.lang.Specification
 
 @SpringBootTest
-@ActiveProfiles('integration')
+@ActiveProfiles('integration-test')
 class BobbyRemoteApplicationSpec extends Specification{
 
     @Autowired
@@ -16,6 +16,6 @@ class BobbyRemoteApplicationSpec extends Specification{
     def "test context loads"() {
         expect:
         true
-        context != null
+        context
     }
 }

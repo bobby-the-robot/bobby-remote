@@ -7,6 +7,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class AMQPConfiguration {
 
     @Bean
     @SneakyThrows
+    @Profile("!integration-test")
     public Channel channel(@Value("${amqp.uri}") String amqpUri) {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUri(amqpUri);
