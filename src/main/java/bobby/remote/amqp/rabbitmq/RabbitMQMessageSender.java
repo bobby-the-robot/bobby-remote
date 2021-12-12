@@ -1,7 +1,7 @@
 package bobby.remote.amqp.rabbitmq;
 
 import bobby.remote.amqp.MessageSender;
-import bobby.remote.dto.MotionDto;
+import bobby.remote.model.Motion;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,10 @@ public class RabbitMQMessageSender implements MessageSender {
 
     @Override
     @SneakyThrows
-    public void send(MotionDto motionDto) {
-        channel.basicPublish("", MOTION_CONTROL_QUEUE_NAME,
-                MessageProperties.TEXT_PLAIN,
-                motionDto.getDirection().name().getBytes(StandardCharsets.UTF_8));
+    public void send(Motion motion) {
+        byte[] payload = motion.getDirection()
+                .name()
+                .getBytes(StandardCharsets.UTF_8);
+        channel.basicPublish("", MOTION_CONTROL_QUEUE_NAME, MessageProperties.TEXT_PLAIN, payload);
     }
 }

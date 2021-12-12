@@ -1,4 +1,4 @@
-package bobby.remote.dto;
+package bobby.remote.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MotionDto {
+public class Motion {
 
-    private DirectionDto direction;
+    private Direction direction;
 
-    public enum DirectionDto {
+    public enum Direction {
         FORWARD, LEFT, RIGHT, BACK, STOP
     }
 }
