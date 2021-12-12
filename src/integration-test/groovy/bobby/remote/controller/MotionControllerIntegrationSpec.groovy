@@ -28,7 +28,9 @@ class MotionControllerIntegrationSpec extends Specification {
 
     def "should send motion direction to message queue"() {
         given:
-        String directionPayload = '{"direction": "FORWARD"}'
+        String direction = 'FORWARD'
+        byte[] directionBytes = direction.bytes
+        String directionPayload = "{\"direction\": \"$direction\"}"
 
         when:
         mvc.perform(post("/move").accept(APPLICATION_JSON_VALUE)
@@ -37,6 +39,7 @@ class MotionControllerIntegrationSpec extends Specification {
                 .andExpect(status().isOk())
 
         then:
-        1 * amqpChannel.basicPublish('', MOTION_CONTROL_QUEUE_NAME, MessageProperties.TEXT_PLAIN, 'FORWARD'.bytes)
+        1 * amqpChannel.basicPublish(
+                '', MOTION_CONTROL_QUEUE_NAME, MessageProperties.TEXT_PLAIN, directionBytes)
     }
 }
