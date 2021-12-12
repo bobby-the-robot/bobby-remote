@@ -41,5 +41,6 @@ class MotionControllerIntegrationSpec extends Specification {
         then:
         1 * amqpChannel.basicPublish(
                 '', MOTION_CONTROL_QUEUE_NAME, MessageProperties.TEXT_PLAIN, directionBytes)
+        0 * _
     }
 }
