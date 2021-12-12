@@ -1,0 +1,36 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Step 1 - Create a temporary artifact downloads folder
+      run: mkdir downloads
+        
+    - name: step 2 - Add artifacts to publish to the temp folder
+      run: |
+        cd downloads
+        echo 'alpha'    > alpha.html
+        echo 'bravo'    > bravo.html
+        echo 'charlie'  > charlie.html
+        cd ..
+    
+    - name: Step 3 - Use the Upload Artifact GitHub Action
+      uses: actions/upload-artifact@v2
+      with: 
+        name: assets-for-download
+        path: downloads
+    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
