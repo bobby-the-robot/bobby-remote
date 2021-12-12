@@ -31,6 +31,9 @@ jobs:
       with: 
         name: assets-for-download
         path: downloads
-    
+    - name: Unit tests
+      run: ./gradlew test
+    - name: Integration tests
+      run: ./gradlew integrationTest
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
