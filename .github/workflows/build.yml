@@ -37,7 +37,7 @@ jobs:
       run: ./gradlew integrationTest
     - name: Assemble jar
       run: ./gradlew assemble
-    - name: Build the Docker image
+    - name: Build docker image
       run: docker build -t registry.heroku.com/bobby-remote-stage/web .
     - name: Deploy at heroku
       run: |
