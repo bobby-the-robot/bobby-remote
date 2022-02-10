@@ -1,5 +1,0 @@
-build:
-  docker:
-    web: Dockerfile
-run:
-  web: java -Xms128m -Xmx512m -jar *.jar
