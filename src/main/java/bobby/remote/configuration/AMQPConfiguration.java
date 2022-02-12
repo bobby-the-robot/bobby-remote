@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import java.util.Map;
 
 import static bobby.remote.configuration.Constants.MOTION_CONTROL_QUEUE_NAME;
+import static bobby.remote.configuration.Constants.VIDEO_STREAMING_QUEUE_NAME;
 
 @Configuration
 public class AMQPConfiguration {
@@ -30,6 +31,7 @@ public class AMQPConfiguration {
         Channel channel = factory.newConnection()
                 .createChannel();
         channel.queueDeclare(MOTION_CONTROL_QUEUE_NAME, false, false, false, QUEUE_ARGS);
+        channel.queueDeclare(VIDEO_STREAMING_QUEUE_NAME, false, false, false, QUEUE_ARGS);
 
         return channel;
     }
