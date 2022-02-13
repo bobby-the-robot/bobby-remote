@@ -13,18 +13,18 @@ import java.util.Base64;
 @RequiredArgsConstructor
 public class VideoController {
 
-    private final SimpMessageSendingOperations messagingTemplate;
+    //private final SimpMessageSendingOperations messagingTemplate;
 
-/*    @PostMapping("/frames")
+    @PostMapping("/frames")
     @SendTo("/topic/frames")
     public String stream(@RequestBody byte[] frame) {
         return Base64.getEncoder()
                 .encodeToString(frame);
-    }*/
+    }
 
-    @PostMapping("/frames")
+/*    @PostMapping("/frames")
     public void receive(@RequestBody byte[] bytes) {
         String payload = Base64.getEncoder().encodeToString(bytes);
         messagingTemplate.convertAndSend("/topic/frames", payload);
-    }
+    }*/
 }
