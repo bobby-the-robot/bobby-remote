@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
-import java.util.Date;
 
 import static bobby.remote.configuration.Constants.VIDEO_STREAMING_QUEUE_NAME;
 
@@ -23,17 +22,14 @@ public class VideoController {
 
     @SneakyThrows
     @GetMapping("/stream")
-    protected void stream(HttpServletResponse response) {
+    public void stream(HttpServletResponse response) {
         response.setContentType("multipart/x-mixed-replace; boundary=--BoundaryString");
         OutputStream outputStream = response.getOutputStream();
 
         while(true) {
             GetResponse payload = channel.basicGet(VIDEO_STREAMING_QUEUE_NAME, true);
 
-            if (payload == null) {
-                Thread.sleep(10);
-            } else {
-                System.out.println(new Date());
+            if (payload != null) {
                 byte[] body = payload.getBody();
                 outputStream.write((
                         "--BoundaryString\r\n" +
