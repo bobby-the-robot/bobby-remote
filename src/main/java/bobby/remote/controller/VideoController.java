@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Base64;
+
 @Controller
 @RequiredArgsConstructor
 public class VideoController {
@@ -14,6 +16,7 @@ public class VideoController {
 
     @PostMapping("/frames")
     public void receive(@RequestBody byte[] bytes) {
-        messagingTemplate.convertAndSend("/topic/frames", bytes);
+        String payload = Base64.getEncoder().encodeToString(bytes);
+        messagingTemplate.convertAndSend("/topic/frames", payload);
     }
 }
