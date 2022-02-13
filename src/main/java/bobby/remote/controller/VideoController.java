@@ -1,46 +1,21 @@
 package bobby.remote.controller;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.GetResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
-
-import static bobby.remote.configuration.Constants.VIDEO_STREAMING_QUEUE_NAME;
+import java.util.Base64;
 
 @Controller
 @RequiredArgsConstructor
 public class VideoController {
 
-    private static final byte[] TWO_LINE_BYTES = "\r\n\r\n".getBytes();
-
-    private final Channel channel;
-
-    @SneakyThrows
-    @GetMapping("/stream")
-    public void stream(HttpServletResponse response) {
-        response.setContentType("multipart/x-mixed-replace; boundary=--BoundaryString");
-        OutputStream outputStream = response.getOutputStream();
-
-        while(true) {
-            GetResponse payload = channel.basicGet(VIDEO_STREAMING_QUEUE_NAME, true);
-
-            if (payload != null) {
-                byte[] body = payload.getBody();
-                outputStream.write((
-                        "--BoundaryString\r\n" +
-                                "Content-type: image/jpeg\r\n" +
-                                "Content-Length: " +
-                                body.length +
-                                "\r\n\r\n").getBytes());
-                outputStream.write(body);
-                outputStream.write(TWO_LINE_BYTES);
-                //outputStream.flush();
-            }
-        }
+    @PostMapping("/frames")
+    @SendTo("/topic/frames")
+    public String stream(@RequestBody byte[] frame) {
+        return Base64.getEncoder()
+                .encodeToString(frame);
     }
 }
