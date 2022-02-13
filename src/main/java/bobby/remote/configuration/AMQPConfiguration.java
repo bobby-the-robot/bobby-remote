@@ -24,9 +24,9 @@ public class AMQPConfiguration {
     @Bean
     @SneakyThrows
     @Profile("!integration-test")
-    public Channel channel(/*@Value("${amqp.uri}") String amqpUri*/) {
+    public Channel channel(@Value("${amqp.uri}") String amqpUri) {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setUri("amqps://mmkkhpcj:HTPKQlUzYFBQrXUqypUSfsuy8FGKI8oe@whale.rmq.cloudamqp.com/mmkkhpcj");
+        factory.setUri(amqpUri);
 
         Channel channel = factory.newConnection()
                 .createChannel();
