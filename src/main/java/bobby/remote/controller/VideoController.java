@@ -5,6 +5,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,9 +25,11 @@ public class VideoController {
 
     @MessageMapping("/client")
     @SendTo("/topic/frames")
+    @GetMapping("/frames")
     //public byte[] stream(@RequestBody byte[] bytes) {
-    public String stream(@RequestBody String bytes) {
+    //public String stream(@RequestBody String bytes) {
+    public void stream(@RequestBody String bytes) {
         System.out.println(bytes);
-        return bytes;
+        messagingTemplate.convertAndSend("/topic/frames", bytes);
     }
 }
