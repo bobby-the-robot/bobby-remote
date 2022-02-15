@@ -26,6 +26,7 @@ public class VideoController {
     @SendTo("/topic/frames")
     //public byte[] stream(@RequestBody byte[] bytes) {
     public String stream(@RequestBody String bytes) {
+        System.out.println(bytes);
         return bytes;
     }
 }
