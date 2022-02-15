@@ -1,6 +1,8 @@
 package bobby.remote.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +16,15 @@ public class VideoController {
 
     private final SimpMessageSendingOperations messagingTemplate;
 
-    @PostMapping("/frames")
+/*    @PostMapping("/frames")
     public void receive(@RequestBody byte[] bytes) {
         String payload = Base64.getEncoder().encodeToString(bytes);
         messagingTemplate.convertAndSend("/topic/frames", payload);
+    }*/
+
+    @MessageMapping("/client")
+    @SendTo("/topic/frames")
+    public byte[] stream(@RequestBody byte[] bytes) {
+        return bytes;
     }
 }

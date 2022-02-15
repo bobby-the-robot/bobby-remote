@@ -19,6 +19,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/client");
         registry.addEndpoint("/video");
         registry.addEndpoint("/video").withSockJS();
     }
