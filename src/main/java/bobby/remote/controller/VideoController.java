@@ -28,8 +28,9 @@ public class VideoController {
     @GetMapping("/frames")
     //public byte[] stream(@RequestBody byte[] bytes) {
     //public String stream(@RequestBody String bytes) {
-    public void stream(@RequestBody String bytes) {
+    public void stream(@RequestBody byte[] bytes) {
         System.out.println(bytes);
-        messagingTemplate.convertAndSend("/topic/frames", bytes);
+        String payload = Base64.getEncoder().encodeToString(bytes);
+        messagingTemplate.convertAndSend("/topic/frames", payload);
     }
 }
