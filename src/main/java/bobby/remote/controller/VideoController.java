@@ -29,8 +29,8 @@ public class VideoController {
     //public byte[] stream(@RequestBody byte[] bytes) {
     //public String stream(@RequestBody String bytes) {
     public void stream(@RequestBody byte[] bytes) {
-        System.out.println(bytes);
         String payload = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(new String(bytes));
         messagingTemplate.convertAndSend("/topic/frames", payload);
     }
 }
