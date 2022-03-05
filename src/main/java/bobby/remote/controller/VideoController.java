@@ -28,8 +28,9 @@ public class VideoController {
     //public byte[] stream(@RequestBody byte[] bytes) {
     //public String stream(@RequestBody String payload) {
     //public void stream(@RequestBody String payload) {
-    public void stream(@RequestBody String payload) {
-        System.out.println(payload);
-        messagingTemplate.convertAndSend("/topic/frames", payload);
+    public String stream(@RequestBody String payload) {
+        //System.out.println(payload);
+        //messagingTemplate.convertAndSend("/topic/frames", payload);
+        return payload;
     }
 }
