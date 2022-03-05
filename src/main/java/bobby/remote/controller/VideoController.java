@@ -28,8 +28,9 @@ public class VideoController {
     //public byte[] stream(@RequestBody byte[] bytes) {
     //public String stream(@RequestBody String payload) {
     //public void stream(@RequestBody String payload) {
-    public String stream(@RequestBody byte[] bytes) {
-        System.out.println(bytes);
-        return Base64.getEncoder().encodeToString(bytes);
+    public String stream(@RequestBody String payload) {
+        //System.out.println(bytes);
+        //return Base64.getEncoder().encodeToString(bytes);
+        return payload;
     }
 }
