@@ -25,7 +25,6 @@ public class VideoController {
 
     @MessageMapping("/client")
     @SendTo("/topic/frames")
-    @GetMapping("/frames")
     //public byte[] stream(@RequestBody byte[] bytes) {
     //public String stream(@RequestBody String payload) {
     //public void stream(@RequestBody String payload) {
