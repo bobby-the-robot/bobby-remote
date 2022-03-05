@@ -27,9 +27,10 @@ public class VideoController {
     @SendTo("/topic/frames")
     @GetMapping("/frames")
     //public byte[] stream(@RequestBody byte[] bytes) {
-    //public void stream(@RequestBody byte[] bytes) {
     //public String stream(@RequestBody String payload) {
-    public void stream(@RequestBody String payload) {
+    //public void stream(@RequestBody String payload) {
+    public void stream(@RequestBody byte[] bytes) {
+        String payload = Base64.getEncoder().encodeToString(bytes);
         System.out.println(payload);
         messagingTemplate.convertAndSend("/topic/frames", payload);
     }
