@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Base64;
 import java.util.Date;
 
-//@Controller
-@RestController
+@Controller
+//@RestController
 @RequiredArgsConstructor
 public class VideoController {
 
@@ -34,6 +34,7 @@ public class VideoController {
     @SendTo("/topic/frames")
     public String stream(@RequestBody byte[] bytes) {
         System.out.println(new Date());
-        return Base64.getEncoder().encodeToString(bytes);
+        String payload = Base64.getEncoder().encodeToString(bytes);
+        return payload;
     }
 }
