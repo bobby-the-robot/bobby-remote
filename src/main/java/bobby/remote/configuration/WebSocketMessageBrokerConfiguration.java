@@ -25,9 +25,9 @@ public class WebSocketMessageBrokerConfiguration implements WebSocketMessageBrok
         registry.addEndpoint("/video").withSockJS();
     }
 
-    public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
+/*    public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
         registration.setMessageSizeLimit(10 * 1024 * 1024); // default : 64 * 1024
         registration.setSendTimeLimit(2048 * 10000); // default : 10 * 10000
         registration.setSendBufferSizeLimit(200 * 512 * 1024); // default : 512 * 1024
-    }
+    }*/
 }
