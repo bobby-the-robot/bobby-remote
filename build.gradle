@@ -25,7 +25,10 @@ ext {
 
 dependencies {
 	//spring
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation('org.springframework.boot:spring-boot-starter-websocket'){
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	implementation("org.springframework.boot:spring-boot-starter-jetty")
 	//rabbitmq
 	implementation 'com.rabbitmq:amqp-client:5.14.0'
 	//lombok
