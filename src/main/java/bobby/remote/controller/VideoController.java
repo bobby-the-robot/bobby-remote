@@ -12,7 +12,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class VideoController {
 
-    @MessageMapping("/client")
+    @MessageMapping("/video")
     @SendTo("/topic/frames")
     public String stream(@RequestBody String payload) {
         System.out.println(new Date());
