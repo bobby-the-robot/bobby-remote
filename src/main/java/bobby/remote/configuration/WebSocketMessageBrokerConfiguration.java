@@ -20,6 +20,7 @@ public class WebSocketMessageBrokerConfiguration implements WebSocketMessageBrok
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/motion");
         registry.addEndpoint("/video");
         registry.addEndpoint("/video").withSockJS();
     }

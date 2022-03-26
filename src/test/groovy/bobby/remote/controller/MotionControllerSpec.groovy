@@ -1,6 +1,5 @@
 package bobby.remote.controller
 
-import bobby.remote.amqp.MessageSender
 import bobby.remote.dto.MotionDto
 import bobby.remote.dto.MotionDto.DirectionDto
 import bobby.remote.model.Motion
@@ -12,23 +11,25 @@ import spock.lang.Subject
 class MotionControllerSpec extends Specification {
 
     private ConversionService conversionService = Mock ConversionService
-    private MessageSender messageSender = Mock MessageSender
 
     @Subject
-    private MotionController motionController = new MotionController(conversionService, messageSender)
+    private MotionController motionController = new MotionController(conversionService)
 
     def "should invoke message sender"() {
         given:
         MotionDto motionDto = new MotionDto(direction)
         Motion motion = new Motion(Direction.valueOf(direction.name()))
+        Motion expected = new Motion(Direction.valueOf(direction.name()))
 
         when:
-        motionController.move(motionDto)
+        Motion actual = motionController.move(motionDto)
 
         then:
         1 * conversionService.convert(motionDto, Motion) >> motion
-        1 * messageSender.send(motion)
         0 * _
+
+        and:
+        actual == expected
 
         where:
         direction               | _

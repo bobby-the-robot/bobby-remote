@@ -29,8 +29,6 @@ dependencies {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 	}
 	implementation("org.springframework.boot:spring-boot-starter-jetty")
-	//rabbitmq
-	implementation 'com.rabbitmq:amqp-client:5.14.0'
 	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

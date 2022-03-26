@@ -6,8 +6,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Date;
-
 @Controller
 @RequiredArgsConstructor
 public class VideoController {
