@@ -14,6 +14,7 @@ public class MotionController {
     @PostMapping("/move")
     @SendTo("/topic/motion")
     public MotionDto move(@RequestBody MotionDto motionDto) {
+        System.out.println(motionDto);
         return motionDto;
     }
 }
