@@ -1,4 +1,4 @@
-const socket = new SockJS('/video');
+const socket = new SockJS('/ws');
 const stompClient = Stomp.over(socket);
 
 stompClient.connect({}, function(frame) {
