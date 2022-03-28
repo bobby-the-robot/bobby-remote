@@ -11,7 +11,7 @@ const move = direction => {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({'direction': direction})
+        body: direction
     });
 }
 

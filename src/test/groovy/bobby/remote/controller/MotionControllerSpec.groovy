@@ -1,34 +1,30 @@
 package bobby.remote.controller
 
-import bobby.remote.dto.MotionDto
-import bobby.remote.dto.MotionDto.DirectionDto
-import spock.lang.Ignore
+import org.springframework.messaging.simp.SimpMessageSendingOperations
 import spock.lang.Specification
 import spock.lang.Subject
 
 class MotionControllerSpec extends Specification {
 
+    SimpMessageSendingOperations messagingTemplate = Mock SimpMessageSendingOperations
+
     @Subject
-    private MotionController motionController = new MotionController()
+    private MotionController motionController = new MotionController(messagingTemplate)
 
-    @Ignore
-    def "should invoke message sender"() {
-        given:
-        MotionDto motionDto = new MotionDto(direction)
-        MotionDto expected = new MotionDto(direction)
-
+    def "should invoke messaging template"() {
         when:
-        MotionDto actual = motionController.move(motionDto)
+        motionController.move(direction)
 
         then:
-        actual == expected
+        1 * messagingTemplate.convertAndSend('/topic/motion', direction)
+        0 * _
 
         where:
-        direction               | _
-        DirectionDto.FORWARD    | _
-        DirectionDto.BACK       | _
-        DirectionDto.RIGHT      | _
-        DirectionDto.LEFT       | _
-        DirectionDto.STOP       | _
+        direction    | _
+        'FORWARD'    | _
+        'BACK'       | _
+        'RIGHT'      | _
+        'LEFT'       | _
+        'STOP'       | _
     }
 }
