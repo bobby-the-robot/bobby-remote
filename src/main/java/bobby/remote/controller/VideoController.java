@@ -11,6 +11,7 @@ public class VideoController {
     @MessageMapping("/video")
     @SendTo("/topic/frames")
     public String stream(@RequestBody String payload) {
+        System.out.println(payload);
         return payload;
     }
 }
