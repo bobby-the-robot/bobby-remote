@@ -7,10 +7,6 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles('integration-test')
@@ -43,28 +39,4 @@ class MotionControllerIntegrationSpec extends Specification {
         'BACK'      | _
         'STOP'      | _
     }*/
-
-    def 'should return bad request status on incorrect direction'() {
-        given:
-        String directionPayload = '{"direction": "UNKNOWN"}'
-
-        when:
-        mvc.perform(post("/move").accept(APPLICATION_JSON_VALUE)
-                    .contentType(APPLICATION_JSON_VALUE)
-                    .content(directionPayload))
-                .andExpect(status().isBadRequest())
-
-        then:
-        0 * _
-    }
-
-    def 'should return bad request status on empty payload'() {
-        when:
-        mvc.perform(post("/move").accept(APPLICATION_JSON_VALUE)
-                    .contentType(APPLICATION_JSON_VALUE))
-                .andExpect(status().isBadRequest())
-
-        then:
-        0 * _
-    }
 }
