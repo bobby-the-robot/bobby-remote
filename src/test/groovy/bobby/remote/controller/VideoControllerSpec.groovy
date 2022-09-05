@@ -22,4 +22,19 @@ class VideoControllerSpec extends Specification {
         and:
         0 * _
     }
+
+    def "should convert byte array to a base64 string and return it"() {
+        given:
+        byte[] input = [1,2,3]
+        String expected = 'AQID'
+
+        when:
+        String actual = videoController.stream(input)
+
+        then:
+        actual == expected
+
+        and:
+        0 * _
+    }
 }
