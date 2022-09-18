@@ -15,7 +15,7 @@ const move = direction => {
     });
 }
 
-const init = function() {
+const init = () => {
     const body = document.body;
     const forward = document.querySelector("div#forward");
     const left = document.querySelector("div#left");
@@ -34,20 +34,6 @@ const init = function() {
     };
     back.onmousedown = () => {
         move(BACK);
-    };
-
-    //onmouseup
-    forward.onmouseup = () => {
-        move(STOP);
-    };
-    left.onmouseup = () => {
-        move(STOP);
-    };
-    right.onmouseup = () => {
-        move(STOP);
-    };
-    back.onmouseup = () => {
-        move(STOP);
     };
 
     //onkeydown
@@ -72,9 +58,5 @@ const init = function() {
         }
 
         move(direction);
-    };
-
-    body.onkeyup = () => {
-        move(STOP);
     };
 }();
