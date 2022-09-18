@@ -1,2 +1,2 @@
 # bobby-remote
-Remote control for bobby robot
+Remote control for bobby the robot.
