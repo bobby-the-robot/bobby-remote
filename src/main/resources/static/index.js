@@ -59,4 +59,6 @@ const init = () => {
 
         move(direction);
     };
-}();
+};
+
+init();
