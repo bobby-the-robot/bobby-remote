@@ -20,8 +20,8 @@ public class WebSocketMessageBrokerConfiguration implements WebSocketMessageBrok
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/");
-        registry.addEndpoint("/").withSockJS();
+        registry.addEndpoint("/ws");
+        registry.addEndpoint("/ws").withSockJS();
     }
 
     public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
